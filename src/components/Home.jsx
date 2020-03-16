@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import styled from 'styled-components'
 
 import Input from './Input'
 
+const Container = styled.div`
+    background-color: black;
+    margin: 5% 10%;
+`
+const Header = styled.h1`
+    color: yellow;
+`
 const Home = () => {
     const [items, setItem]= useState(null)
 
@@ -17,9 +25,10 @@ const Home = () => {
     });
 
     return (
-        <div>
-            <p>Home</p>
-        </div>
+        <Container>
+            <Header>STAR WARS FAN PAGE</Header>
+            <Input />
+        </Container>
     );
 }
 
