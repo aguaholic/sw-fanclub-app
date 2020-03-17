@@ -9,6 +9,7 @@ const Container = styled.div`
 const Header = styled.h1`
     font-family: 'Poller One', cursive;
     color: yellow;
+    margin-bottom: 30px;
 `
 const Home = () => {
   return (

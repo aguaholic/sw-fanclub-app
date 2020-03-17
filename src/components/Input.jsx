@@ -69,7 +69,7 @@ const Input = () => {
 
   const list = items.map((item, index) => {
     return (
-      <ListItem key={index}>{item.name}, {item.height}</ListItem>
+      <ListItem key={index}>{item.name}, {item.height} cm</ListItem>
     )
   })
 
