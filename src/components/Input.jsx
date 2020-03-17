@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import List from './List'
 import ListItem from './ListItem'
 import Spinner from './Spinner'
+import Sorting from './Sorting'
 
 const InputField = styled.input`
   width: 100%;
@@ -26,19 +27,25 @@ const Input = () => {
   const [enteredFilter, setEnteredFilter] = useState('')
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(false)
+  const [sortDirection, setSortDirection] = useState(null)
 
   useEffect(() => {
     const timer = setTimeout(() => {
       if (enteredFilter) {
-        const query =
-          enteredFilter.length === 0
-            ? ''
-            : `?search=${enteredFilter}`
+        let query = ''
+
+        query += enteredFilter.length === 0
+          ? ''
+          : `?search=${enteredFilter}`
+
+        query += sortDirection !== null
+          ? '&order=' + sortDirection
+          : ''
+
         setLoading(true)
         axios.get(
           'http://localhost:8000/characters' + query
         ).then(response => {
-          console.log(response.data)
           const dataItems = response.data
             .map(item => {
               return {
@@ -58,18 +65,26 @@ const Input = () => {
     return () => {
       clearTimeout(timer)
     }
-  }, [enteredFilter])
+  }, [enteredFilter, sortDirection])
 
   const list = items.map((item, index) => {
     return (
-      <ListItem key={index}>{item.name}</ListItem>
+      <ListItem key={index}>{item.name}, {item.height}</ListItem>
     )
   })
 
   let renderIt = (
-    <List>
-      {list}
-    </List>
+    <>
+      {list.length > 0
+        ? <>
+          <Sorting onSort={setSortDirection}/>
+          <List>
+            {list}
+          </List>
+        </>
+        : null
+      }
+    </>
   )
   if (loading) {
     renderIt = <Spinner />
