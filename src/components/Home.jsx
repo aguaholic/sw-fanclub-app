@@ -7,6 +7,7 @@ const Container = styled.div`
     margin: 5% 10%;
 `
 const Header = styled.h1`
+    font-family: 'Poller One', cursive;
     color: yellow;
 `
 const Home = () => {
