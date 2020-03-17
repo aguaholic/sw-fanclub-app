@@ -7,7 +7,7 @@ import ListItem from './ListItem'
 import Spinner from './Spinner'
 import Sorting from './Sorting'
 
-const InputField = styled.input`
+const SearchField = styled.input`
   width: 100%;
   background-color: #545454;
   color: white;
@@ -23,7 +23,7 @@ const InputField = styled.input`
 }
 `
 
-const Input = () => {
+const Search = () => {
   const [enteredFilter, setEnteredFilter] = useState('')
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(false)
@@ -92,7 +92,7 @@ const Input = () => {
 
   return (
     <>
-      <InputField
+      <SearchField
         placeholder="What's the movie?"
         value={enteredFilter}
         onChange={event => setEnteredFilter(event.target.value)}
@@ -101,4 +101,4 @@ const Input = () => {
     </>)
 }
 
-export default Input
+export default Search

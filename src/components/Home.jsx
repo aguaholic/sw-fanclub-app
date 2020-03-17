@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Input from './Input'
+import Search from './Search'
 
 const Container = styled.div`
     margin: 5% 10%;
@@ -15,7 +15,7 @@ const Home = () => {
   return (
     <Container>
       <Header>STAR WARS FAN PAGE</Header>
-      <Input />
+      <Search />
     </Container>
   )
 }
