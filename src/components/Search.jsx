@@ -22,12 +22,17 @@ const SearchField = styled.input`
     box-shadow: 0 0 10px #FFFF99;
 }
 `
+const ErrorMessage = styled.h2`
+  margin: 20px 0;
+  color: white;
+`
 
 const Search = () => {
   const [enteredFilter, setEnteredFilter] = useState('')
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(false)
   const [sortDirection, setSortDirection] = useState(null)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -59,6 +64,7 @@ const Search = () => {
           .catch(err => {
             console.log(err)
             setLoading(false)
+            setError('Add a valid movie name')
           })
       }
     }, 600)
@@ -89,7 +95,9 @@ const Search = () => {
   if (loading) {
     renderIt = <Spinner />
   }
-
+  if (error) {
+    renderIt = <ErrorMessage>{error}</ErrorMessage>
+  }
   return (
     <>
       <SearchField
