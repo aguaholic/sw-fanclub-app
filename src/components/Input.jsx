@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import List from './List'
 import ListItem from './ListItem'
+import Spinner from './Spinner'
 
 const InputField = styled.input`
   width: 100%;
@@ -24,6 +25,7 @@ const InputField = styled.input`
 const Input = () => {
   const [enteredFilter, setEnteredFilter] = useState('')
   const [items, setItems] = useState([])
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -32,6 +34,7 @@ const Input = () => {
           enteredFilter.length === 0
             ? ''
             : `?search=${enteredFilter}`
+        setLoading(true)
         axios.get(
           'http://localhost:8000/characters' + query
         ).then(response => {
@@ -44,9 +47,12 @@ const Input = () => {
               }
             })
           setItems(dataItems)
+          setLoading(false)
         })
-      } else {
-        console.log('wrong')
+          .catch(err => {
+            console.log(err)
+            setLoading(false)
+          })
       }
     }, 600)
     return () => {
@@ -60,6 +66,15 @@ const Input = () => {
     )
   })
 
+  let renderIt = (
+    <List>
+      {list}
+    </List>
+  )
+  if (loading) {
+    renderIt = <Spinner />
+  }
+
   return (
     <>
       <InputField
@@ -67,9 +82,7 @@ const Input = () => {
         value={enteredFilter}
         onChange={event => setEnteredFilter(event.target.value)}
       />
-      <List>
-        {list}
-      </List>
+      {renderIt}
     </>)
 }
 
