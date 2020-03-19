@@ -2,9 +2,13 @@
 
 This is a front end application for Star Wars fans. 
 You can search for a movie and find all the characters that were in this specific movie.
-A nice addition is that you can sort them by theirs heights :D
+A nice addition is that you can sort them by their heights :D
+Made with React.
 
 Have fun!
+
+![](sw-fanclub.gif)
+
 
 ## Available Scripts
 
